@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import TabNavigation from '@/components/TabNavigation'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 import UserMenu from '@/components/UserMenu'
 
 export const metadata: Metadata = {
@@ -22,15 +23,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
-      <body className="bg-gray-50">
-        <AuthProvider>
-          <div className="min-h-screen pb-20">
-            <UserMenu />
-            {children}
-          </div>
-          <TabNavigation />
-        </AuthProvider>
+    <html lang="ko" suppressHydrationWarning>
+      <body className="bg-white dark:bg-black transition-colors">
+        <ThemeProvider>
+          <AuthProvider>
+            <div className="min-h-screen pb-20 bg-white dark:bg-black">
+              <UserMenu />
+              {children}
+            </div>
+            <TabNavigation />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
