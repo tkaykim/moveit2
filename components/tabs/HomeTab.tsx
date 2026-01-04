@@ -118,6 +118,7 @@ export default function HomeTab() {
                         alt={academy.name_kr || ''}
                         fill
                         className="object-cover"
+                        unoptimized
                       />
                     </div>
                   ) : (
@@ -175,6 +176,7 @@ export default function HomeTab() {
                       alt={classItem.title || ''}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                 ) : (
@@ -227,6 +229,7 @@ export default function HomeTab() {
                       alt={instructor.name_kr || ''}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                 ) : (

@@ -101,6 +101,7 @@ export default function InstructorsTab() {
                       alt={instructor.name_kr || ''}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                 ) : (

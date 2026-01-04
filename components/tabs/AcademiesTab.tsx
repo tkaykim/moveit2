@@ -107,6 +107,7 @@ export default function AcademiesTab() {
                           alt={academy.name_kr || ''}
                           fill
                           className="object-cover"
+                          unoptimized
                         />
                       </div>
                     ) : (

@@ -72,7 +72,15 @@ export default function ScheduleTab() {
       const { data, error } = await query
 
       if (error) throw error
-      setClasses((data as ClassSchedule[]) || [])
+      
+      // Supabase join 결과를 올바른 형태로 변환
+      const formattedData = (data || []).map((item: any) => ({
+        ...item,
+        academies: Array.isArray(item.academies) ? item.academies[0] || null : item.academies,
+        instructors: Array.isArray(item.instructors) ? item.instructors[0] || null : item.instructors,
+      }))
+      
+      setClasses(formattedData as ClassSchedule[])
     } catch (error) {
       console.error('Error fetching schedule:', error)
     } finally {
@@ -85,7 +93,11 @@ export default function ScheduleTab() {
     const date = parseISO(dateString)
     if (isToday(date)) return '오늘'
     if (isTomorrow(date)) return '내일'
-    return format(date, 'M월 d일 (EEE)', { locale: undefined })
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토']
+    const weekday = weekdays[date.getDay()]
+    return `${month}월 ${day}일 (${weekday})`
   }
 
   const formatTime = (dateString: string | null) => {
@@ -191,6 +203,7 @@ export default function ScheduleTab() {
                               alt={classItem.title || ''}
                               fill
                               className="object-cover"
+                              unoptimized
                             />
                           </div>
                         ) : (
